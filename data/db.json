@@ -1,0 +1,483 @@
+{
+  "company": {
+    "name": "บริษัท โฟลว์เทค แอคเคาน์ติ้ง จำกัด (สำนักงานใหญ่)",
+    "taxId": "0105567012345",
+    "period": "ตุลาคม 2026",
+    "locked": false
+  },
+  "accounts": [
+    {
+      "code": "11110",
+      "name": "เงินสด",
+      "nameEn": "Cash on Hand",
+      "category": "ASSET",
+      "subType": "สินทรัพย์หมุนเวียน",
+      "normalSide": "DR",
+      "system": true
+    },
+    {
+      "code": "11120",
+      "name": "เงินฝากออมทรัพย์ - ธ.กสิกรไทย",
+      "nameEn": "Cash in Bank - KBANK",
+      "category": "ASSET",
+      "subType": "สินทรัพย์หมุนเวียน",
+      "normalSide": "DR",
+      "system": true
+    },
+    {
+      "code": "11310",
+      "name": "ลูกหนี้การค้า",
+      "nameEn": "Accounts Receivable",
+      "category": "ASSET",
+      "subType": "สินทรัพย์หมุนเวียน",
+      "normalSide": "DR",
+      "system": true
+    },
+    {
+      "code": "11510",
+      "name": "ภาษีซื้อ",
+      "nameEn": "Input VAT 7%",
+      "category": "ASSET",
+      "subType": "ภาษีมูลค่าเพิ่ม",
+      "normalSide": "DR",
+      "system": true
+    },
+    {
+      "code": "11520",
+      "name": "ภาษีซื้อยังไม่ถึงกำหนด",
+      "nameEn": "Undue Input VAT",
+      "category": "ASSET",
+      "subType": "ภาษีมูลค่าเพิ่ม",
+      "normalSide": "DR",
+      "system": false
+    },
+    {
+      "code": "11540",
+      "name": "ภาษีเงินได้ถูกหัก ณ ที่จ่าย",
+      "nameEn": "Withholding Tax Asset",
+      "category": "ASSET",
+      "subType": "ภาษีหัก ณ ที่จ่าย",
+      "normalSide": "DR",
+      "system": true
+    },
+    {
+      "code": "12110",
+      "name": "อุปกรณ์สำนักงานและคอมพิวเตอร์",
+      "nameEn": "Office & Computer Equipment",
+      "category": "ASSET",
+      "subType": "สินทรัพย์ไม่หมุนเวียน",
+      "normalSide": "DR",
+      "system": true
+    },
+    {
+      "code": "12120",
+      "name": "ค่าเสื่อมราคาสะสม - อุปกรณ์สำนักงาน",
+      "nameEn": "Accumulated Depreciation",
+      "category": "ASSET",
+      "subType": "สินทรัพย์ไม่หมุนเวียน",
+      "normalSide": "CR",
+      "system": true
+    },
+    {
+      "code": "21210",
+      "name": "เจ้าหนี้การค้า",
+      "nameEn": "Accounts Payable",
+      "category": "LIABILITY",
+      "subType": "หนี้สินหมุนเวียน",
+      "normalSide": "CR",
+      "system": true
+    },
+    {
+      "code": "21310",
+      "name": "ค่าใช้จ่ายค้างจ่าย",
+      "nameEn": "Accrued Expenses",
+      "category": "LIABILITY",
+      "subType": "หนี้สินหมุนเวียน",
+      "normalSide": "CR",
+      "system": false
+    },
+    {
+      "code": "21510",
+      "name": "ภาษีขาย",
+      "nameEn": "Output VAT 7%",
+      "category": "LIABILITY",
+      "subType": "ภาษีมูลค่าเพิ่ม",
+      "normalSide": "CR",
+      "system": true
+    },
+    {
+      "code": "21520",
+      "name": "ภาษีขายยังไม่ถึงกำหนด",
+      "nameEn": "Undue Output VAT",
+      "category": "LIABILITY",
+      "subType": "ภาษีมูลค่าเพิ่ม",
+      "normalSide": "CR",
+      "system": false
+    },
+    {
+      "code": "21610",
+      "name": "ภาษีหัก ณ ที่จ่ายค้างจ่าย (ภ.ง.ด.1/3/53)",
+      "nameEn": "Withholding Tax Payable",
+      "category": "LIABILITY",
+      "subType": "ภาษีหัก ณ ที่จ่าย",
+      "normalSide": "CR",
+      "system": true
+    },
+    {
+      "code": "31110",
+      "name": "ทุนเรือนหุ้นสามัญ",
+      "nameEn": "Paid-up Share Capital",
+      "category": "EQUITY",
+      "subType": "ทุนเรือนหุ้น",
+      "normalSide": "CR",
+      "system": true
+    },
+    {
+      "code": "32110",
+      "name": "กำไร (ขาดทุน) สะสม",
+      "nameEn": "Retained Earnings",
+      "category": "EQUITY",
+      "subType": "กำไรสะสม",
+      "normalSide": "CR",
+      "system": true
+    },
+    {
+      "code": "41110",
+      "name": "รายได้จากการขายสินค้า",
+      "nameEn": "Sales Revenue",
+      "category": "REVENUE",
+      "subType": "รายได้หลัก",
+      "normalSide": "CR",
+      "system": true
+    },
+    {
+      "code": "41120",
+      "name": "รายได้จากการให้บริการ",
+      "nameEn": "Service Revenue",
+      "category": "REVENUE",
+      "subType": "รายได้หลัก",
+      "normalSide": "CR",
+      "system": true
+    },
+    {
+      "code": "42110",
+      "name": "ดอกเบี้ยรับและรายได้อื่น",
+      "nameEn": "Other Income",
+      "category": "REVENUE",
+      "subType": "รายได้อื่น",
+      "normalSide": "CR",
+      "system": false
+    },
+    {
+      "code": "51110",
+      "name": "ต้นทุนขายและต้นทุนบริการ",
+      "nameEn": "Cost of Goods & Services",
+      "category": "EXPENSE",
+      "subType": "ต้นทุนหลัก",
+      "normalSide": "DR",
+      "system": true
+    },
+    {
+      "code": "52110",
+      "name": "เงินเดือนและค่าจ้าง",
+      "nameEn": "Salaries and Wages",
+      "category": "EXPENSE",
+      "subType": "ค่าใช้จ่ายบริหาร",
+      "normalSide": "DR",
+      "system": false
+    },
+    {
+      "code": "53110",
+      "name": "ค่าเช่าสำนักงาน",
+      "nameEn": "Office Rent Expense",
+      "category": "EXPENSE",
+      "subType": "ค่าใช้จ่ายบริหาร",
+      "normalSide": "DR",
+      "system": false
+    },
+    {
+      "code": "53120",
+      "name": "ค่าโฆษณาและการตลาด",
+      "nameEn": "Marketing & Ads Expense",
+      "category": "EXPENSE",
+      "subType": "ค่าใช้จ่ายขาย",
+      "normalSide": "DR",
+      "system": false
+    },
+    {
+      "code": "53130",
+      "name": "ค่าบริการวิชาชีพและจ้างทำของ",
+      "nameEn": "Professional & Outsource Fee",
+      "category": "EXPENSE",
+      "subType": "ค่าใช้จ่ายบริหาร",
+      "normalSide": "DR",
+      "system": false
+    },
+    {
+      "code": "53140",
+      "name": "ค่าน้ำ ค่าไฟ ค่าอินเทอร์เน็ต",
+      "nameEn": "Utilities & Internet",
+      "category": "EXPENSE",
+      "subType": "ค่าใช้จ่ายบริหาร",
+      "normalSide": "DR",
+      "system": false
+    },
+    {
+      "code": "53210",
+      "name": "ค่าเสื่อมราคา - อุปกรณ์สำนักงาน",
+      "nameEn": "Depreciation Expense",
+      "category": "EXPENSE",
+      "subType": "ค่าใช้จ่ายบริหาร",
+      "normalSide": "DR",
+      "system": true
+    }
+  ],
+  "journals": [
+    {
+      "id": "jv-001",
+      "docNo": "JV202610001",
+      "book": "JV",
+      "date": "2026-10-01",
+      "contact": "ยอดยกมาต้นงวด / ผู้ถือหุ้น",
+      "description": "บันทึกยอดยกมาต้นงวด: เงินฝากธนาคาร อุปกรณ์สำนักงาน และทุนจดทะเบียน",
+      "refDoc": "OPEN-2026",
+      "meta": {
+        "vatAmount": 0,
+        "whtAmount": 0,
+        "source": "OPENING"
+      },
+      "lines": [
+        {
+          "accountCode": "11120",
+          "description": "เงินฝากออมทรัพย์ ธ.กสิกรไทย ยกมา",
+          "debit": 500000,
+          "credit": 0
+        },
+        {
+          "accountCode": "12110",
+          "description": "อุปกรณ์คอมพิวเตอร์สำนักงาน (ราคาทุน)",
+          "debit": 60000,
+          "credit": 0
+        },
+        {
+          "accountCode": "31110",
+          "description": "ทุนเรือนหุ้นสามัญชำระแล้ว",
+          "debit": 0,
+          "credit": 560000
+        }
+      ]
+    },
+    {
+      "id": "rv-001",
+      "docNo": "RV202610001",
+      "book": "RV",
+      "date": "2026-10-05",
+      "contact": "บจก. สยามดิจิทัล โซลูชั่น",
+      "description": "รับชำระค่าบริการพัฒนาระบบ (VAT 7%, ลูกค้าหัก ณ ที่จ่าย 3%)",
+      "refDoc": "INV202610001",
+      "meta": {
+        "subTotal": 100000,
+        "vatRate": 7,
+        "vatAmount": 7000,
+        "whtRate": 3,
+        "whtAmount": 3000,
+        "source": "AUTO_SALES"
+      },
+      "lines": [
+        {
+          "accountCode": "11120",
+          "description": "รับเงินโอนสุทธิเข้า ธ.กสิกรไทย",
+          "debit": 104000,
+          "credit": 0
+        },
+        {
+          "accountCode": "11540",
+          "description": "ภาษีเงินได้ถูกหัก ณ ที่จ่าย 3%",
+          "debit": 3000,
+          "credit": 0
+        },
+        {
+          "accountCode": "41120",
+          "description": "รายได้จากการให้บริการ",
+          "debit": 0,
+          "credit": 100000
+        },
+        {
+          "accountCode": "21510",
+          "description": "ภาษีขาย 7%",
+          "debit": 0,
+          "credit": 7000
+        }
+      ]
+    },
+    {
+      "id": "sv-001",
+      "docNo": "SV202610001",
+      "book": "SV",
+      "date": "2026-10-09",
+      "contact": "บจก. เอเพ็กซ์ รีเทล กรุ๊ป",
+      "description": "ออกใบแจ้งหนี้ค่าบริการดูแลระบบรายปี (ขายเชื่อ)",
+      "refDoc": "INV202610002",
+      "meta": {
+        "subTotal": 60000,
+        "vatRate": 7,
+        "vatAmount": 4200,
+        "whtRate": 0,
+        "whtAmount": 0,
+        "source": "AUTO_SALES"
+      },
+      "lines": [
+        {
+          "accountCode": "11310",
+          "description": "ลูกหนี้การค้า ตามใบแจ้งหนี้ INV202610002",
+          "debit": 64200,
+          "credit": 0
+        },
+        {
+          "accountCode": "41120",
+          "description": "รายได้จากการให้บริการ",
+          "debit": 0,
+          "credit": 60000
+        },
+        {
+          "accountCode": "21510",
+          "description": "ภาษีขาย 7%",
+          "debit": 0,
+          "credit": 4200
+        }
+      ]
+    },
+    {
+      "id": "pv-001",
+      "docNo": "PV202610001",
+      "book": "PV",
+      "date": "2026-10-10",
+      "contact": "บจก. บางกอก ทาวเวอร์ พร็อพเพอร์ตี้",
+      "description": "จ่ายค่าเช่าสำนักงานเดือน ต.ค. (VAT 7%, หัก ณ ที่จ่าย 5%)",
+      "refDoc": "EXP202610001",
+      "meta": {
+        "subTotal": 25000,
+        "vatRate": 7,
+        "vatAmount": 1750,
+        "whtRate": 5,
+        "whtAmount": 1250,
+        "source": "AUTO_EXPENSE"
+      },
+      "lines": [
+        {
+          "accountCode": "53110",
+          "description": "ค่าเช่าสำนักงานประจำเดือน ต.ค.",
+          "debit": 25000,
+          "credit": 0
+        },
+        {
+          "accountCode": "11510",
+          "description": "ภาษีซื้อ 7%",
+          "debit": 1750,
+          "credit": 0
+        },
+        {
+          "accountCode": "21610",
+          "description": "ภาษีหัก ณ ที่จ่ายค้างจ่าย 5% (ภ.ง.ด.53)",
+          "debit": 0,
+          "credit": 1250
+        },
+        {
+          "accountCode": "11120",
+          "description": "โอนจ่ายสุทธิจาก ธ.กสิกรไทย",
+          "debit": 0,
+          "credit": 25500
+        }
+      ]
+    },
+    {
+      "id": "pv-002",
+      "docNo": "PV202610002",
+      "book": "PV",
+      "date": "2026-10-12",
+      "contact": "คุณธนพล (ฟรีแลนซ์ออกแบบ UX/UI)",
+      "description": "จ่ายค่าจ้างออกแบบ UX/UI (ไม่มี VAT, หัก ณ ที่จ่าย 3% ภ.ง.ด.3)",
+      "refDoc": "EXP202610002",
+      "meta": {
+        "subTotal": 18000,
+        "vatRate": 0,
+        "vatAmount": 0,
+        "whtRate": 3,
+        "whtAmount": 540,
+        "source": "AUTO_EXPENSE"
+      },
+      "lines": [
+        {
+          "accountCode": "53130",
+          "description": "ค่าจ้างออกแบบ UX/UI",
+          "debit": 18000,
+          "credit": 0
+        },
+        {
+          "accountCode": "21610",
+          "description": "ภาษีหัก ณ ที่จ่ายค้างจ่าย 3% (ภ.ง.ด.3)",
+          "debit": 0,
+          "credit": 540
+        },
+        {
+          "accountCode": "11120",
+          "description": "โอนจ่ายสุทธิจาก ธ.กสิกรไทย",
+          "debit": 0,
+          "credit": 17460
+        }
+      ]
+    },
+    {
+      "id": "uv-001",
+      "docNo": "UV202610001",
+      "book": "UV",
+      "date": "2026-10-14",
+      "contact": "บจก. คลาวด์ โฮสติ้ง ไทยแลนด์",
+      "description": "รับใบวางบิลค่า Cloud Server และโฆษณา (ซื้อเชื่อ)",
+      "refDoc": "BILL202610001",
+      "meta": {
+        "subTotal": 12000,
+        "vatRate": 7,
+        "vatAmount": 840,
+        "whtRate": 0,
+        "whtAmount": 0,
+        "source": "AUTO_EXPENSE"
+      },
+      "lines": [
+        {
+          "accountCode": "53120",
+          "description": "ค่าโฆษณาและระบบคลาวด์",
+          "debit": 12000,
+          "credit": 0
+        },
+        {
+          "accountCode": "11510",
+          "description": "ภาษีซื้อ 7%",
+          "debit": 840,
+          "credit": 0
+        },
+        {
+          "accountCode": "21210",
+          "description": "เจ้าหนี้การค้า - บจก. คลาวด์ โฮสติ้ง ไทยแลนด์",
+          "debit": 0,
+          "credit": 12840
+        }
+      ]
+    }
+  ],
+  "assets": [
+    {
+      "id": "ast-001",
+      "code": "AST-001",
+      "name": "MacBook Pro & ชุดคอมพิวเตอร์สำนักงาน (2 เครื่อง)",
+      "purchaseDate": "2026-10-01",
+      "cost": 60000,
+      "salvage": 0,
+      "usefulLifeYears": 3,
+      "accumDeprPrior": 0,
+      "assetAccount": "12110",
+      "accumAccount": "12120",
+      "deprExpenseAccount": "53210"
+    }
+  ]
+}

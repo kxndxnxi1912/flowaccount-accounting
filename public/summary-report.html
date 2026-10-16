@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>สรุปงานระบบบัญชี FlowAccount (1 หน้า A4)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    @page {
+      size: A4 portrait;
+      margin: 10mm 12mm;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: 'Sarabun', 'Leelawadee UI', 'Tahoma', sans-serif;
+      color: #0f172a;
+      background: #ffffff;
+      font-size: 11.2px;
+      line-height: 1.42;
+    }
+    .header {
+      border-bottom: 2px solid #0095ff;
+      padding-bottom: 6px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .header h1 {
+      font-size: 17px;
+      font-weight: 700;
+      color: #0f1f38;
+    }
+    .header .sub {
+      font-size: 11px;
+      color: #475569;
+    }
+    .badge {
+      background: #e6f4ff;
+      color: #0077d1;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 10.5px;
+    }
+    h2 {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f1f38;
+      background: #f1f5f9;
+      border-left: 3.5px solid #0095ff;
+      padding: 3px 8px;
+      margin: 8px 0 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 4px 0 6px;
+      font-size: 10.8px;
+    }
+    th, td {
+      border: 1px solid #cbd5e1;
+      padding: 3.5px 6px;
+      text-align: left;
+      vertical-align: top;
+    }
+    th {
+      background: #f8fafc;
+      font-weight: 700;
+      color: #334155;
+    }
+    .num {
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+      font-family: Consolas, 'Sarabun', monospace;
+    }
+    .code {
+      font-family: Consolas, monospace;
+      font-weight: 700;
+      background: #f1f5f9;
+      padding: 0 4px;
+      border-radius: 3px;
+      font-size: 10.2px;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .box {
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      padding: 6px 8px;
+      background: #fafbfc;
+    }
+    .box-title {
+      font-weight: 700;
+      color: #0f1f38;
+      margin-bottom: 3px;
+      font-size: 11.5px;
+    }
+    ul {
+      padding-left: 15px;
+    }
+    li {
+      margin-bottom: 2px;
+    }
+    .footer {
+      margin-top: 8px;
+      padding-top: 5px;
+      border-top: 1px solid #e2e8f0;
+      font-size: 10px;
+      color: #64748b;
+      display: flex;
+      justify-content: space-between;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div>
+      <h1>สรุปงาน: ระบบบริหารบัญชี FlowAccount (Reverse Engineered)</h1>
+      <div class="sub">สรุปหลักการทำงาน โครงสร้างระบบบัญชีคู่ (Double-Entry GL) ภาษีไทย และการประมวลผลงบการเงิน (1 หน้า A4)</div>
+    </div>
+    <div class="badge">One-Page Summary</div>
+  </div>
+
+  <h2>1. เป้าหมายและแนวคิดหลักของระบบ</h2>
+  <p>
+    ถอดแบบพาร์ท <strong>"บริหารบัญชี"</strong> ของ FlowAccount โดยแปลงธุรกรรมการเปิดบิล (รายรับ/รายจ่าย) ให้กลายเป็น<strong>รายการบันทึกบัญชีคู่ (เดบิต Dr. = เครดิต Cr.)</strong> อัตโนมัติ แล้ววิ่งเข้าสู่ <strong>บัญชีแยกประเภท (GL) &rarr; งบทดลอง &rarr; งบกำไรขาดทุน &rarr; งบดุล</strong> แบบ Real-time พร้อมระบบเจาะลึกย้อนกลับ (Drill-down)
+  </p>
+
+  <h2>2. โครงสร้างผังบัญชี 5 หมวด และสมุดรายวัน 5 เล่ม</h2>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">ผังบัญชีมาตรฐาน 5 หมวด (Chart of Accounts)</div>
+      <table>
+        <thead>
+          <tr><th>หมวด</th><th>ฝั่งปกติ</th><th>รหัสบัญชีหลัก</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>1 สินทรัพย์</strong></td><td>Dr.</td><td><span class="code">11110</span> เงินสด, <span class="code">11120</span> ธนาคาร, <span class="code">11310</span> ลูกหนี้, <span class="code">11510</span> ภาษีซื้อ</td></tr>
+          <tr><td><strong>2 หนี้สิน</strong></td><td>Cr.</td><td><span class="code">21210</span> เจ้าหนี้, <span class="code">21510</span> ภาษีขาย, <span class="code">21610</span> หัก ณ ที่จ่ายค้างจ่าย</td></tr>
+          <tr><td><strong>3 ทุน</strong></td><td>Cr.</td><td><span class="code">31110</span> ทุนเรือนหุ้น, <span class="code">32110</span> กำไรสะสม</td></tr>
+          <tr><td><strong>4 รายได้</strong></td><td>Cr.</td><td><span class="code">41110</span> รายได้ขายสินค้า, <span class="code">41120</span> รายได้บริการ</td></tr>
+          <tr><td><strong>5 ค่าใช้จ่าย</strong></td><td>Dr.</td><td><span class="code">51110</span> ต้นทุน, <span class="code">52110</span> เงินเดือน, <span class="code">53110</span> ค่าเช่า, <span class="code">53210</span> ค่าเสื่อม</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box">
+      <div class="box-title">สมุดรายวัน 5 เล่ม (ตามรหัสจริงของ FlowAccount)</div>
+      <table>
+        <thead>
+          <tr><th>รหัส</th><th>ชื่อสมุดรายวัน</th><th>เงื่อนไขการลงบัญชี</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="code">SV</span></td><td>สมุดรายวันขาย</td><td>ออกใบแจ้งหนี้ / ขายเชื่อ (ตั้งลูกหนี้ <span class="code">11310</span>)</td></tr>
+          <tr><td><span class="code">RV</span></td><td>สมุดรายวันรับ</td><td>รับชำระเงินสด/โอนจากลูกค้า (เข้า <span class="code">11110/11120</span>)</td></tr>
+          <tr><td><span class="code">UV</span></td><td>สมุดรายวันซื้อ</td><td>รับวางบิล / ซื้อเชื่อ (ตั้งเจ้าหนี้ <span class="code">21210</span>)</td></tr>
+          <tr><td><span class="code">PV</span></td><td>สมุดรายวันจ่าย</td><td>จ่ายชำระค่าใช้จ่าย/เจ้าหนี้ (ตัด <span class="code">11110/11120</span>)</td></tr>
+          <tr><td><span class="code">JV</span></td><td>สมุดรายวันทั่วไป</td><td>ตั้งยอดยกมา, คิดค่าเสื่อมราคา, ปรับปรุง/ปิดงวด</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2>3. สูตรผูกคู่บัญชีอัตโนมัติ (Auto-Post GL, VAT 7%, WHT หัก ณ ที่จ่าย)</h2>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:26%;">ธุรกรรม</th>
+        <th style="width:37%;">เดบิต (Dr.)</th>
+        <th style="width:37%;">เครดิต (Cr.)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>รับรายได้ค่าบริการ (RV)</strong><br/>100,000 + VAT 7% (หัก ณ ที่จ่าย 3%)</td>
+        <td><span class="code">11120</span> เงินฝากธนาคาร <strong>104,000</strong><br/><span class="code">11540</span> ภาษีถูกหัก ณ ที่จ่าย <strong>3,000</strong></td>
+        <td><span class="code">41120</span> รายได้บริการ <strong>100,000</strong><br/><span class="code">21510</span> ภาษีขาย 7% <strong>7,000</strong></td>
+      </tr>
+      <tr>
+        <td><strong>จ่ายค่าเช่าสำนักงาน (PV)</strong><br/>25,000 + VAT 7% (หัก ณ ที่จ่าย 5%)</td>
+        <td><span class="code">53110</span> ค่าเช่าสำนักงาน <strong>25,000</strong><br/><span class="code">11510</span> ภาษีซื้อ 7% <strong>1,750</strong></td>
+        <td><span class="code">21610</span> หัก ณ ที่จ่ายค้างจ่าย <strong>1,250</strong><br/><span class="code">11120</span> เงินฝากธนาคาร <strong>25,500</strong></td>
+      </tr>
+      <tr>
+        <td><strong>คิดค่าเสื่อมราคาสินทรัพย์ (JV)</strong></td>
+        <td><span class="code">53210</span> ค่าเสื่อมราคา (ราคาทุน &divide; อายุปี &divide; 12)</td>
+        <td><span class="code">12120</span> ค่าเสื่อมราคาสะสม</td>
+      </tr>
+      <tr>
+        <td><strong>ปิดงวด ภ.พ.30 &amp; ปิดงบกำไรขาดทุน (JV)</strong></td>
+        <td>ล้าง <span class="code">21510</span> ภาษีขาย / ปิดหมวด <span class="code">4 รายได้</span></td>
+        <td>ล้าง <span class="code">11510</span> ภาษีซื้อ / ปิดหมวด <span class="code">5 ค่าใช้จ่าย</span> เข้า <span class="code">32110 กำไรสะสม</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>4. ฟีเจอร์หลักในระบบเว็บที่พัฒนาขึ้น (8 โมดูลครบวงจร)</h2>
+  <div class="grid-2">
+    <div class="box">
+      <ul>
+        <li><strong>1. ภาพรวมบัญชี (Dashboard):</strong> สรุปรายได้ ค่าใช้จ่าย กำไรสุทธิ เงินสด/ธนาคาร และยอด ภ.พ.30 แบบ Real-time</li>
+        <li><strong>2. เปิดบิลลงบัญชีอัตโนมัติ (Auto-Post):</strong> คำนวณ VAT 7% (แยกนอก/รวมใน) และ WHT (1%, 2%, 3%, 5%) พร้อมแสดง GL Preview ก่อนโพสต์</li>
+        <li><strong>3. สมุดรายวัน 5 เล่ม:</strong> สร้าง/แก้ไข/ลบใบสำคัญ ตรวจเช็ค <span class="code">Dr. = Cr.</span> อัตโนมัติ พร้อมปุ่มดุลยอด</li>
+        <li><strong>4. สินทรัพย์ &amp; ค่าเสื่อมราคา:</strong> คำนวณค่าเสื่อมวิธีเส้นตรงรายเดือนและกดโพสต์ลง <span class="code">JV</span> ในคลิกเดียว</li>
+      </ul>
+    </div>
+    <div class="box">
+      <ul>
+        <li><strong>5. บัญชีแยกประเภท (GL):</strong> แสดงยอดสะสม (Running Balance) รายบัญชี กรองตามหมวด และ Export Excel (CSV)</li>
+        <li><strong>6. งบทดลอง &amp; งบการเงิน:</strong> งบทดลอง, งบกำไรขาดทุน (P&amp;L) และงบดุล (<span class="code">A = L + E</span>) พร้อมคลิก Drill-down ย้อนกลับได้ทุกจุด</li>
+        <li><strong>7. รายงานภาษี:</strong> สรุปภาษีขาย-ภาษีซื้อ (ภ.พ.30) และภาษีหัก ณ ที่จ่าย (ภ.ง.ด.1/3/53)</li>
+        <li><strong>8. บริหารผังบัญชี &amp; ล็อกงวด:</strong> เพิ่มรหัสบัญชี ป้องกันการลบบัญชีที่ใช้งานแล้ว และล็อกงวดบัญชีป้องกันการแก้ย้อนหลัง</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>5. สรุปผลการประมวลผลงบการเงิน (ข้อมูลตั้งต้น) และวิธีเข้าใช้งาน</h2>
+  <div class="grid-2">
+    <div class="box">
+      <div class="box-title">ความถูกต้องของตัวเลขทางบัญชี (งวด ต.ค. 2026)</div>
+      <ul>
+        <li><strong>งบทดลอง:</strong> ยอดรวมเคลื่อนไหว Dr. = Cr. เท่ากับ <strong>788,790.00 บาท</strong> (ยอดคงเหลือสุทธิ Dr. = Cr. เท่ากับ <strong>745,830.00 บาท</strong>)</li>
+        <li><strong>งบกำไรขาดทุน:</strong> รายได้ 160,000.00 &minus; ค่าใช้จ่าย 55,000.00 = <strong>กำไรสุทธิ 105,000.00 บาท</strong></li>
+        <li><strong>งบดุล:</strong> สินทรัพย์รวม <strong>690,830.00</strong> = หนี้สิน (25,830.00) + ทุนและกำไรสุทธิ (665,000.00) <strong>ดุล 100%</strong></li>
+      </ul>
+    </div>
+    <div class="box">
+      <div class="box-title">ตำแหน่งไฟล์และวิธีรันใช้งาน</div>
+      <ul>
+        <li><strong>โฟลเดอร์โค้ด:</strong> <span class="code">D:\PreTest\flowaccount-accounting</span></li>
+        <li><strong>รันในเครื่อง:</strong> <span class="code">node server.js</span> &rarr; เข้า <span class="code">http://localhost:3000</span></li>
+        <li><strong>แชร์ในวง LAN:</strong> <span class="code">http://192.168.1.53:3000</span></li>
+        <li><strong>แชร์ออนไลน์สาธารณะ:</strong> ดับเบิลคลิก <span class="code">start-public.bat</span> (Cloudflare Tunnel)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span>เอกสารสรุปโครงการ: ระบบบริหารบัญชี FlowAccount (Reverse Engineered Core GL)</span>
+    <span>ขนาดมาตรฐาน: 1 หน้ากระดาษ A4</span>
+  </div>
+
+</body>
+</html>

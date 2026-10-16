@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>FlowAccount — บริหารบัญชี (Accounting Management)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <!-- Backdrop สำหรับเมนูมือถือ -->
+  <div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="brand-logo">FA</div>
+        <div>
+          <div class="brand-title">FlowAccount</div>
+          <span class="brand-sub">เมนูบริหารบัญชี</span>
+        </div>
+      </div>
+      <button class="sidebar-close-btn" id="btn-close-sidebar" aria-label="ปิดเมนู">✕</button>
+    </div>
+
+    <div class="nav-group-label">บันทึกบัญชี</div>
+    <ul class="nav-list">
+      <li>
+        <button class="nav-btn active" data-view="dashboard">
+          <span>ภาพรวมบัญชี</span>
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" data-view="autopost">
+          <span>เปิดบิลลงบัญชีอัตโนมัติ</span>
+          <span class="nav-badge">Auto</span>
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" data-view="journals">
+          <span>สมุดรายวัน (SV/RV/UV/PV/JV)</span>
+          <span class="nav-badge" id="nav-journal-count">0</span>
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" data-view="assets">
+          <span>สินทรัพย์ & ค่าเสื่อมราคา</span>
+        </button>
+      </li>
+    </ul>
+
+    <div class="nav-group-label">รายงานด้านบัญชี</div>
+    <ul class="nav-list">
+      <li>
+        <button class="nav-btn" data-view="ledger">
+          <span>บัญชีแยกประเภท (GL)</span>
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" data-view="reports">
+          <span>งบทดลอง & งบการเงิน</span>
+        </button>
+      </li>
+      <li>
+        <button class="nav-btn" data-view="tax">
+          <span>ภาษีซื้อ-ขาย & หัก ณ ที่จ่าย</span>
+        </button>
+      </li>
+    </ul>
+
+    <div class="nav-group-label">บริหารผังบัญชี</div>
+    <ul class="nav-list">
+      <li>
+        <button class="nav-btn" data-view="coa">
+          <span>ผังบัญชี (Chart of Accounts)</span>
+          <span class="nav-badge" id="nav-coa-count">0</span>
+        </button>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div id="period-lock-indicator">สถานะงวด: <strong>เปิดใช้งาน</strong></div>
+      <div style="margin-top:4px;">SV · RV · UV · PV · JV</div>
+    </div>
+  </aside>
+
+  <div class="main-wrap">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="menu-toggle-btn" id="btn-open-sidebar" aria-label="เปิดเมนู">
+          ☰ เมนู
+        </button>
+        <div class="company-info">
+          <span class="company-name" id="company-name">บริษัท โฟลว์เทค แอคเคาน์ติ้ง จำกัด</span>
+          <span class="period-pill" id="company-period">งวด: ตุลาคม 2026</span>
+        </div>
+      </div>
+      <div class="topbar-actions">
+        <a class="btn btn-outline btn-sm" href="/FlowAccount_Accounting_Summary.pdf" target="_blank" style="text-decoration:none;">📄 สรุป PDF</a>
+        <button class="btn btn-outline btn-sm" id="btn-toggle-lock">ล็อกงวดบัญชี</button>
+        <button class="btn btn-outline btn-sm" id="btn-open-jv">+ สมุดรายวัน (JV)</button>
+        <button class="btn btn-primary btn-sm" id="btn-go-autopost">+ เปิดบิลอัตโนมัติ</button>
+        <button class="btn btn-outline btn-sm" id="btn-reset-demo">รีเซ็ต</button>
+      </div>
+    </header>
+
+    <!-- แถบเลือกเมนูทางลัดบนมือถือ/แท็บเล็ต -->
+    <nav class="mobile-quick-nav" aria-label="เมนูทางลัด">
+      <button class="mq-btn active" data-view="dashboard">ภาพรวม</button>
+      <button class="mq-btn" data-view="autopost">+ เปิดบิล Auto</button>
+      <button class="mq-btn" data-view="journals">สมุดรายวัน</button>
+      <button class="mq-btn" data-view="ledger">แยกประเภท (GL)</button>
+      <button class="mq-btn" data-view="reports">งบทดลอง/งบดุล</button>
+      <button class="mq-btn" data-view="tax">ภาษี ภ.พ.30</button>
+      <button class="mq-btn" data-view="assets">สินทรัพย์</button>
+      <button class="mq-btn" data-view="coa">ผังบัญชี</button>
+    </nav>
+
+    <main class="content" id="app-view"></main>
+  </div>
+
+  <!-- Modal: สร้าง/แก้ไข ใบสำคัญสมุดรายวัน -->
+  <div class="modal-backdrop" id="jv-modal">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <strong style="font-size:16px;" id="jv-modal-title">สร้างใบสำคัญลงบัญชี (Journal Entry)</strong>
+          <div style="font-size:12px;color:var(--text-muted);">ยอดรวมเดบิต (Dr.) ต้องเท่ากับ เครดิต (Cr.)</div>
+        </div>
+        <button class="btn btn-outline btn-sm" id="btn-close-jv">✕ ปิด</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-grid">
+          <div class="field">
+            <label>สมุดรายวัน</label>
+            <select id="jv-book">
+              <option value="JV">JV - สมุดรายวันทั่วไป</option>
+              <option value="SV">SV - สมุดรายวันขาย</option>
+              <option value="RV">RV - สมุดรายวันรับ</option>
+              <option value="UV">UV - สมุดรายวันซื้อ</option>
+              <option value="PV">PV - สมุดรายวันจ่าย</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>วันที่รายการ</label>
+            <input type="date" class="input" id="jv-date" value="2026-10-16" />
+          </div>
+          <div class="field">
+            <label>ผู้ติดต่อ / คู่ค้า</label>
+            <input type="text" class="input" id="jv-contact" placeholder="ชื่อลูกค้า / ผู้ขาย / กรมสรรพากร" />
+          </div>
+          <div class="field">
+            <label>เลขที่เอกสารอ้างอิง</label>
+            <input type="text" class="input" id="jv-ref" placeholder="เช่น INV-001, ADJ-10" />
+          </div>
+        </div>
+        <div class="field" style="margin-bottom:14px;">
+          <label>คำอธิบายรายการ</label>
+          <input type="text" class="input" id="jv-desc" placeholder="ระบุคำอธิบายรายการสมุดรายวัน" />
+        </div>
+
+        <div class="table-wrap" style="border:1px solid var(--border);border-radius:6px;">
+          <table class="jv-modal-table">
+            <thead>
+              <tr>
+                <th style="min-width:200px;width:36%;">รหัสบัญชี / ชื่อบัญชี</th>
+                <th style="min-width:160px;width:28%;">คำอธิบายบรรทัด</th>
+                <th class="num" style="min-width:110px;width:15%;">เดบิต (Dr.)</th>
+                <th class="num" style="min-width:110px;width:15%;">เครดิต (Cr.)</th>
+                <th style="width:44px;"></th>
+              </tr>
+            </thead>
+            <tbody id="jv-lines-body"></tbody>
+            <tfoot>
+              <tr class="row-total">
+                <td colspan="2">
+                  <div style="display:flex;gap:6px;flex-wrap:wrap;">
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-add-jv-line">+ เพิ่มบรรทัด</button>
+                    <button type="button" class="btn btn-outline btn-sm" id="btn-auto-balance">ดุลยอดอัตโนมัติ</button>
+                  </div>
+                </td>
+                <td class="num" id="jv-total-dr">0.00</td>
+                <td class="num" id="jv-total-cr">0.00</td>
+                <td></td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div id="jv-balance-status"></div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-outline" id="btn-cancel-jv">ยกเลิก</button>
+          <button class="btn btn-primary" id="btn-save-jv">บันทึก</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "name": "flowaccount-accounting",
+  "version": "1.0.0",
+  "description": "FlowAccount Accounting Engine (Double-Entry GL, Auto-Post VAT/WHT, Trial Balance, P&L, Balance Sheet)",
+  "main": "server.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}
